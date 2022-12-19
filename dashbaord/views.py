@@ -13,7 +13,6 @@ from .task import send_appointment_mail
 class HomePageDoctor(View):
     def get(self, request):
         if request.user.is_authenticated:
-
             doctor = Doctor.objects.get(user=User.objects.get(username=request.user))
             appointments = Appointment.objects.all().filter(
                 doctor=doctor, appointment_date=date.today()
