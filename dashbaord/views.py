@@ -33,9 +33,7 @@ class HomePageDoctor(View):
                 .filter(doctor=doctor, appointment_status="Cancelled")
                 .count
             )
-
             time_slots = ["15 Min", "30 Min", "45 Min", "60 Min"]
-
             data = {
                 "time_slots": time_slots,
                 "doctor": doctor,
@@ -64,7 +62,6 @@ def update_timeslot(request):
         doctor.appointment_slot_time = time_slot
         doctor.day_start_time = start_time
         doctor.day_end_time = end_time
-
         start_time = datetime.strptime(start_time, "%H:%M")
         end_time = datetime.strptime(end_time, "%H:%M")
         time_slot = int(time_slot.split(" ")[0])
@@ -136,7 +133,6 @@ def book_an_appointment(request):
             + "\n\n"
             + "Thank You, \n BookAnAppointment"
         )
-
         send_appointment_mail.delay(subject, body, doctor.email)
         return JsonResponse({"status": 200})
 
